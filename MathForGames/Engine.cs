@@ -63,11 +63,13 @@ namespace MathForGames
             Raylib.SetTargetFPS(60);
 
             Scene scene = new Scene();
-            Actor actor = new Actor('A', 5, 5, Color.RED, "Actor");           
+            //Actor actor = new Actor('A', 5, 5, Color.RED, "Actor");           
             Player player = new Player('@', 5, 5, 50, Color.DARKPURPLE, "Player");
+            Eneme eneme = new Eneme('E', 100, 100, 1, player, Color.RED, "Eneme");
 
-            scene.AddActor(actor);            
+            //scene.AddActor(actor);            
             scene.AddActor(player);
+            scene.AddActor(eneme);
 
             _currentSceneIndex = AddScene(scene);
 
@@ -163,6 +165,6 @@ namespace MathForGames
         public static void CloseApplication()
         {
             _applicationShouldClose = true;
-        }
+        }        
     }
 }

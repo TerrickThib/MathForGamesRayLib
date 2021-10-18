@@ -15,7 +15,7 @@ namespace MathLibrary
         }
 
         /// <summary>
-        /// GEts the length of the vector
+        /// Gets the length of the vector
         /// </summary>
         public float Magnitude
         {

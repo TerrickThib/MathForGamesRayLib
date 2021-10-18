@@ -9,7 +9,7 @@ namespace MathForGames
     struct Icon
     {
         public char Symbol;
-        public Color Color;
+        public Color Color;        
     }
     class Actor
     {
@@ -17,7 +17,7 @@ namespace MathForGames
         private string _name;
         private Vector2 _position;
         private bool _started;
-
+               
         /// <summary>
         /// True if the start function has been called for this actor
         /// </summary>
@@ -36,7 +36,7 @@ namespace MathForGames
         {
             get { return _icon; }
         }
-
+        
         public Actor(char icon, float x, float y, Color color, string name = "Actor")
             : this(icon, new Vector2 { X = x, Y = y}, color, name) {}
         
@@ -55,6 +55,7 @@ namespace MathForGames
         public virtual void Update(float deltaTime)
         {
             Console.WriteLine(_name + ": " + Position.X + ", " + Position.Y);
+
         }
 
         public virtual void Draw()
@@ -66,10 +67,11 @@ namespace MathForGames
         {
 
         }
-
         public virtual void OnCollision(Actor actor)
         {
 
         }
+
+
     }
 }
