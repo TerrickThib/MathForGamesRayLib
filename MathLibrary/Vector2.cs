@@ -27,6 +27,18 @@ namespace MathLibrary
         }
 
         /// <summary>
+        /// Gets the normalized version of this vector without changing it
+        /// </summary>
+        public Vector2 Normalized
+        {
+            get
+            {
+                Vector2 value = this;
+                return value.Normalize();
+            }
+        }
+
+        /// <summary>
         /// Changes this vector to have a magnitude that is equal to one
         /// </summary>
         /// <returns>The result of the normalization. Returns a empty vector if the magnitude is zero</returns>
@@ -38,17 +50,25 @@ namespace MathLibrary
             return this / Magnitude;
         }
 
-        /// <summary>
-        /// Gets the normalized version of this vector without changing it
-        /// </summary>
-        public Vector2 Normalized
+        /// <param name="lhs">The left hand side of the operation</param>
+        /// <param name="rhs">The right hand side of the operation</param>
+        /// <returns>The dot product of the first vector on to the second</returns>
+        public static float DotProduct(Vector2 lhs, Vector2 rhs)
         {
-            get
-            {
-                Vector2 value = this;
-                return value.Normalize();
-            }
+            return (lhs.X * rhs.X) + (lhs.Y * rhs.Y);
         }
+      
+        /// <summary>
+        /// Finds the distance from the first vector to the second
+        /// </summary>
+        /// <param name="lhs">The atarting point</param>
+        /// <param name="rhs">The ending point</param>
+        /// <returns>A scaler reperesenting the distance</returns>
+        public static float Distance(Vector2 lhs, Vector2 rhs)
+        {
+            return (rhs - lhs).Magnitude;
+        }
+
         /// <summary>
         /// Adds the x value of the second vector to the first, and addds the y value of the second vector to the first
         /// </summary>

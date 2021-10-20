@@ -39,12 +39,27 @@ namespace MathForGames
             //Takes players position and eneme position to get differance
             distance = _player.Position - Position;
             distance.Normalize();
-            Velocity = distance * Speed;
+            Velocity = distance * Speed * deltaTime;
 
-            Position += Velocity * deltaTime;
+            if(GetTargetInSight()&& GetTargetIndistance())
+                Position += Velocity;
 
             base.Update(deltaTime);
         }
 
+        public bool GetTargetInSight()
+        {
+            Vector2 directionOfTarget = (_player.Position - Position).Normalized;
+            
+            return Vector2.DotProduct(directionOfTarget, Forward) > 0.5;
+        }
+        public bool GetTargetIndistance()
+        { 
+            return Vector2.Distance(_player.Position, Position) < 100;
+        }
+        public override void OnCollision(Actor actor)
+        {
+            Console.WriteLine("Son done recked");
+        }
     }
 }
