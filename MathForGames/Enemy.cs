@@ -5,7 +5,7 @@ using MathLibrary;
 using Raylib_cs;
 
 namespace MathForGames
-{
+{    
     class Enemy : Actor
     {
         private float _speed;
