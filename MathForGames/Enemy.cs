@@ -6,7 +6,7 @@ using Raylib_cs;
 
 namespace MathForGames
 {
-    class Eneme : Actor
+    class Enemy : Actor
     {
         private float _speed;
         private Vector2 _velocity;
@@ -26,7 +26,7 @@ namespace MathForGames
             get { return _velocity; }
             set { _velocity = value; }
         }
-        public Eneme(char icon, float x, float y, float speed,Player player, Color color, string name = "Actor")
+        public Enemy(char icon, float x, float y, float speed,Player player, Color color, string name = "Actor")
             : base(icon, x, y, color, name)
         {
             _speed = speed;
