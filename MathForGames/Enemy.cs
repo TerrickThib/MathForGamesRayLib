@@ -11,6 +11,8 @@ namespace MathForGames
         private float _speed;
         private Vector2 _velocity;
         public Player _player;
+        private float _maxViewingAngle;
+        private float _maxSightDistance;
 
         
         //Allows us to give _ speed a value
@@ -26,11 +28,26 @@ namespace MathForGames
             get { return _velocity; }
             set { _velocity = value; }
         }
-        public Enemy(char icon, float x, float y, float speed,Player player, Color color, string name = "Actor")
+
+        public float MaxViewingAngle
+        {
+            get { return _maxViewingAngle; }
+            set { _maxViewingAngle = value; }
+        }
+
+        public float MaxSightDistance
+        {
+            get { return _maxSightDistance; }
+            set { _maxSightDistance = value; }
+        }
+
+        public Enemy(char icon, float x, float y, float speed, float maxSightDistance, float maxViewingAngle, Color color, Player player, string name = "Actor")
             : base(icon, x, y, color, name)
         {
             _speed = speed;
             _player = player;
+            _maxViewingAngle = maxViewingAngle;
+            _maxSightDistance = maxSightDistance;
         }
         public override void Update(float deltaTime)
         {
@@ -48,14 +65,14 @@ namespace MathForGames
         }
 
         public bool GetTargetInSight()
-        {
-            Vector2 directionOfTarget = (_player.Position - Position).Normalized;
+        {            
+            Vector2 directionOfTarget = (_player.Position - Position).Normalized;                      
             
-            return Vector2.DotProduct(directionOfTarget, Forward) > 0.5;
+            return Math.Acos(Vector2.DotProduct(directionOfTarget, Forward)) < _maxViewingAngle;                                            
         }
         public bool GetTargetIndistance()
         { 
-            return Vector2.Distance(_player.Position, Position) < 100;
+            return Vector2.Distance(_player.Position, Position) < _maxSightDistance;
         }
         public override void OnCollision(Actor actor)
         {

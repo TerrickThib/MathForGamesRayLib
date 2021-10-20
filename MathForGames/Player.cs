@@ -52,7 +52,10 @@ namespace MathForGames
 
         public override void OnCollision(Actor actor)
         {
-            Engine.CloseApplication();
+            if (actor is Enemy)
+            {
+                Engine.CloseApplication();
+            }
         }
     }
 }
