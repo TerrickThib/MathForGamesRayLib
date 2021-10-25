@@ -65,12 +65,17 @@ namespace MathForGames
             Scene scene = new Scene();
             //Actor actor = new Actor('A', 5, 5, Color.RED, "Actor");           
             Player player = new Player('@', 5, 10, 150, Color.DARKPURPLE, "Player");
-            CircleCollider playerCollider = new CircleCollider(50, player);
-            player.Collider = playerCollider;
+            CircleCollider playerCircleCollider = new CircleCollider(50, player);
+            AABBCollider playerBoxCollider = new AABBCollider(50, 50, player);
+            //player.Collider = playerCircleCollider;
+            player.Collider = playerBoxCollider;
 
-            Enemy enemy = new Enemy('E', 100, 5, 1, 100, 1, Color.RED, player, "Eneme");
-            CircleCollider enemyCollider = new CircleCollider(25, enemy);
-            enemy.Collider = enemyCollider;
+            Enemy enemy = new Enemy('E', 100, 5, 1, 250, 1, Color.RED, player, "Eneme");
+            CircleCollider enemyCircleCollider = new CircleCollider(50, enemy);
+            AABBCollider enemyBoxCollider = new AABBCollider(50, 50, enemy);
+            enemy.Collider = enemyCircleCollider;
+            //enemy.Collider = enemyBoxCollider;
+
             //UI Text Section
             UIText text = new UIText(10, 10, "TestTextBox", Color.BLUE, 70, 70, 15, "Taco Bell Makes me yell");
             

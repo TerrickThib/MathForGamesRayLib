@@ -57,5 +57,11 @@ namespace MathForGames
                 Engine.CloseApplication();
             }
         }
+
+        public override void Draw()
+        {
+            base.Draw();
+            Collider.Draw();
+        }
     }
 }

@@ -78,5 +78,10 @@ namespace MathForGames
         {
             Console.WriteLine("Son done recked");
         }
+        public override void Draw()
+        {
+            base.Draw();
+            Collider.Draw();
+        }
     }
 }
