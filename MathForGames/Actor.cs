@@ -18,7 +18,7 @@ namespace MathForGames
         private Vector2 _position;
         private bool _started;
         private Vector2 _forward = new Vector2(1, 0);
-        private float _collisionRadius;
+        private Collider _collider;
                
         /// <summary>
         /// True if the start function has been called for this actor
@@ -45,10 +45,10 @@ namespace MathForGames
             set { _forward = value; }
         }
 
-        public float CollisionRadius
+        public Collider Collider
         {
-            get { return _collisionRadius; }
-            set { _collisionRadius = value; }
+            get { return _collider; }
+            set { _collider = value; }
         }
 
         public Actor(char icon, float x, float y, Color color, string name = "Actor")
@@ -75,6 +75,7 @@ namespace MathForGames
         public virtual void Draw()
         {
             Raylib.DrawText(Icon.Symbol.ToString(), (int)Position.X, (int)Position.Y, 50, Icon.Color);
+            //Raylib.DrawCircleLines((int)Position.X, (int)Position.Y, CircleCollider, Color.RED);
         }  
 
         public void End()
@@ -93,10 +94,11 @@ namespace MathForGames
         /// <returns>True if the distance between the actors is less than the radii of the two combined</returns>
         public virtual bool CheckForCollision(Actor other)
         {
-            float combineRadii = other.CollisionRadius + CollisionRadius;
-            float distance = Vector2.Distance(Position, other.Position);
+            //Return false if either actor doesn't have a collider attached
+            if (Collider == null || other.Collider == null)
+                return false;
 
-            return distance <= combineRadii;
+            return Collider.CheckCollision(other);
         }
 
     }

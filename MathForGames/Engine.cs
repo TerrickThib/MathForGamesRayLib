@@ -65,9 +65,12 @@ namespace MathForGames
             Scene scene = new Scene();
             //Actor actor = new Actor('A', 5, 5, Color.RED, "Actor");           
             Player player = new Player('@', 5, 10, 150, Color.DARKPURPLE, "Player");
-            player.CollisionRadius = 20;
+            CircleCollider playerCollider = new CircleCollider(50, player);
+            player.Collider = playerCollider;
+
             Enemy enemy = new Enemy('E', 100, 5, 1, 100, 1, Color.RED, player, "Eneme");
-            enemy.CollisionRadius = 20;
+            CircleCollider enemyCollider = new CircleCollider(25, enemy);
+            enemy.Collider = enemyCollider;
             //UI Text Section
             UIText text = new UIText(10, 10, "TestTextBox", Color.BLUE, 70, 70, 15, "Taco Bell Makes me yell");
             
