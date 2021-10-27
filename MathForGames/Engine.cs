@@ -64,14 +64,14 @@ namespace MathForGames
 
             Scene scene = new Scene();
             //Actor actor = new Actor('A', 5, 5, Color.RED, "Actor");           
-            Player player = new Player(5, 10, 150, "Player", "player.png");
+            Player player = new Player(5, 10, 150, "Player", "Images/player.png");
             player.SetScale(50, 50);
             CircleCollider playerCircleCollider = new CircleCollider(50, player);
             AABBCollider playerBoxCollider = new AABBCollider(50, 50, player);
             //player.Collider = playerCircleCollider;
             player.Collider = playerBoxCollider;
 
-            Enemy enemy = new Enemy(100, 5, 1, 250, 1,player, "Eneme", "enemy.png");
+            Enemy enemy = new Enemy(100, 5, 1, 250, 1,player, "Eneme", "Images/enemy.png");
             enemy.SetScale(50, 50);
             CircleCollider enemyCircleCollider = new CircleCollider(50, enemy);
             AABBCollider enemyBoxCollider = new AABBCollider(50, 50, enemy);
@@ -100,7 +100,7 @@ namespace MathForGames
         private void Update(float deltaTime)
         {
             _scenes[_currentSceneIndex].Update(deltaTime);
-            
+                        
             //While there is a key in the input bufer read it
             while (Console.KeyAvailable)
             {
