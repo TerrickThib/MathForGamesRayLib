@@ -13,15 +13,17 @@ namespace MathForGames
         public int Height;
         public int FontSize;
         public Font Font;
+        public Color FontColor;
         
-        public UIText(float x, float y, string name, Color color, int width, int height,int fontSize, string text = "")
-            : base('\0', x, y, color, name)
+        public UIText(float x, float y, string name, Color color, int width, int height, int fontSize, string text = "")
+            : base (x, y, name, "")
         {
             Text = text;
             Width = width;
             Height = height;
             Font = Raylib.LoadFont("resources/fonts/alagard.png");
             FontSize = fontSize;
+            FontColor = color;
         }
       
         public override void Draw()
@@ -29,7 +31,7 @@ namespace MathForGames
             //Makes the Text Box
             Rectangle textBox = new Rectangle(Position.X, Position.Y, Width, Height);
             //Draws out Text Box
-            Raylib.DrawTextRec(Font, Text, textBox, FontSize, 1, true, Icon.Color);
+            Raylib.DrawTextRec(Font, Text, textBox, FontSize, 1, true, FontColor);
         }
     }
 }

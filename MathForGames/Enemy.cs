@@ -41,8 +41,8 @@ namespace MathForGames
             set { _maxSightDistance = value; }
         }
 
-        public Enemy(char icon, float x, float y, float speed, float maxSightDistance, float maxViewingAngle, Color color, Player player, string name = "Actor")
-            : base(icon, x, y, color, name)
+        public Enemy(float x, float y, float speed, float maxSightDistance, float maxViewingAngle, Player player, string name = "Actor", string path = "")
+            : base(x, y,name, path)
         {
             _speed = speed;
             _player = player;

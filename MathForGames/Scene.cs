@@ -111,7 +111,7 @@ namespace MathForGames
 
             //Copy all values exept the actor we dont want into the new array
             int j = 0;
-            for (int i = 0; i < tempArray.Length; i++)
+            for (int i = 0; i < _actors.Length; i++)
             {
                 //If the actor that the loop is on is not the one to remove...
                 if (_actors[i] != actor)
