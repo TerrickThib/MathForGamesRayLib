@@ -36,7 +36,14 @@ namespace MathLibrary
         /// <returns></returns>
         public static Matrix3 CreateRotation(float radians)
         {
+            Matrix3 rotation = new Matrix3();
 
+            rotation.M00 = (float)Math.Cos(radians);
+            rotation.M01 = -(float)Math.Sin(radians);
+            rotation.M10 = (float)Math.Sin(radians);
+            rotation.M11 = (float)Math.Cos(radians);
+
+            return rotation;
         }
 
         /// <summary>
@@ -47,7 +54,10 @@ namespace MathLibrary
         /// <returns></returns>
         public static Matrix3 CreateTranslation(float x, float y)
         {
-
+            Matrix3 translatedMatrix = new Matrix3(1, 0, x,
+                                                   0, 1, y,
+                                                   0, 0, 1);
+            return translatedMatrix;                        
         }
 
         /// <summary>
@@ -58,22 +68,41 @@ namespace MathLibrary
         /// <returns></returns>
         public static Matrix3 CreateScale(float x, float y)
         {
+            Matrix3 scaled = new Matrix3();
 
+            scaled.M00 = x;
+            scaled.M11 = y;
+
+            return scaled;
         }
 
         public static Matrix3 operator +(Matrix3 lhs, Matrix3 rhs)
         {
-
+            return lhs + rhs;
         }
 
         public static Matrix3 operator -(Matrix3 lhs, Matrix3 rhs)
         {
-
+            return lhs - rhs;
         }
 
         public static Matrix3 operator *(Matrix3 lhs, Matrix3 rhs)
         {
+            Matrix3 temp = new Matrix3();
 
+            temp.M00 = (lhs.M00 * rhs.M00) + (lhs.M01 * rhs.M10) + (lhs.M02 * rhs.M20);
+            temp.M01 = (lhs.M00 * rhs.M01) + (lhs.M01 * rhs.M11) + (lhs.M02 * rhs.M21);
+            temp.M02 = (lhs.M00 * rhs.M02) + (lhs.M01 * rhs.M12) + (lhs.M02 * rhs.M22);
+
+            temp.M10 = (lhs.M10 * rhs.M00) + (lhs.M11 * rhs.M10) + (lhs.M12 * rhs.M20);
+            temp.M11 = (lhs.M10 * rhs.M01) + (lhs.M11 * rhs.M11) + (lhs.M12 * rhs.M21);
+            temp.M12 = (lhs.M10 * rhs.M02) + (lhs.M11 * rhs.M12) + (lhs.M12 * rhs.M22);
+
+            temp.M20 = (lhs.M20 * rhs.M00) + (lhs.M21 * rhs.M10) + (lhs.M22 * rhs.M20);
+            temp.M21 = (lhs.M20 * rhs.M01) + (lhs.M21 * rhs.M11) + (lhs.M22 * rhs.M21);
+            temp.M22 = (lhs.M20 * rhs.M02) + (lhs.M21 * rhs.M12) + (lhs.M22 * rhs.M22);
+
+            return temp;
         }
     }
 }

@@ -15,8 +15,7 @@ namespace MathForGames
         private Matrix3 _transform = Matrix3.Identity;        
         private Matrix3 _translation = Matrix3.Identity;
         private Matrix3 _rotation = Matrix3.Identity;
-        private Matrix3 _scale = Matrix3.Identity;
-        private Matrix3 _
+        private Matrix3 _scale = Matrix3.Identity;        
         private Sprite _sprite;
 
 
@@ -122,7 +121,8 @@ namespace MathForGames
         /// <param name="translationY">The new y position</param>
         public void SetTranslation(float translationX, float translationY)
         {
-
+            _translation.M02 = translationX;
+            _translation.M12 = translationY;
         }
 
         /// <summary>
@@ -133,6 +133,8 @@ namespace MathForGames
         public void Translate(float translationX, float translationY)
         {
 
+            _translation.M02 += translationX;
+            _translation.M12 += translationY;
         }
 
         /// <summary>
@@ -141,7 +143,11 @@ namespace MathForGames
         /// <param name="radians">The angle in radians to turn.</param>
         public void SetRotation(float radians)
         {
-
+            _rotation.M00 = (float)Math.Cos(radians);
+            _rotation.M01 = -(float)Math.Sin(radians);
+            _rotation.M10 = (float)Math.Sin(radians);
+            _rotation.M11 = (float)Math.Cos(radians);
+            
         }
 
         /// <summary>
@@ -150,7 +156,10 @@ namespace MathForGames
         /// <param name="radians">The angle in radians to turn.</param>
         public void Rotate(float radians)
         {
-
+            _rotation.M00 += (float)Math.Cos(radians);
+            _rotation.M01 += -(float)Math.Sin(radians);
+            _rotation.M10 += (float)Math.Sin(radians);
+            _rotation.M11 += (float)Math.Cos(radians);
         }
 
         /// <summary>
@@ -171,7 +180,8 @@ namespace MathForGames
         /// <param name="y">The value to scale on the y axis.</param>
         public void Scale(float x, float y)
         {
-
+            _scale.M00 += x;
+            _scale.M11 += y;
         }
     }
 }
