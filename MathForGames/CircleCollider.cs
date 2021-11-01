@@ -27,7 +27,7 @@ namespace MathForGames
                 return false;
 
             //Find the distance between the two actors
-            float distance = Vector2.Distance(other.Owner.Position, Owner.Position);
+            float distance = Vector2.Distance(other.Owner.LocalPosition, Owner.LocalPosition);
             //Find the length of the radii combined
             float combinedRadii = other.CollisionRadius + CollisionRadius;
 
@@ -41,17 +41,17 @@ namespace MathForGames
                 return false;
 
             //Get the direction from this collier to the AABB
-            Vector2 direction = Owner.Position - other.Owner.Position;
+            Vector2 direction = Owner.LocalPosition - other.Owner.LocalPosition;
 
             //Clamp the direction vector to be within the bounds of the AABB
             direction.X = Math.Clamp(direction.X, -other.Width / 2, other.Width / 2);
             direction.Y = Math.Clamp(direction.Y, -other.Height / 2, other.Height / 2);
 
             //Add the direction vector to the AABB center to get the closest point to the circle
-            Vector2 closestPoint = other.Owner.Position + direction;
+            Vector2 closestPoint = other.Owner.LocalPosition + direction;
 
             //Find the distance from the circle's center to the closest point
-            float distanceFromClosestPoint = Vector2.Distance(Owner.Position, closestPoint);
+            float distanceFromClosestPoint = Vector2.Distance(Owner.LocalPosition, closestPoint);
 
             //Return whether or not the distance is less than the circle's radius
             return distanceFromClosestPoint <= CollisionRadius;
@@ -60,7 +60,7 @@ namespace MathForGames
         public override void Draw()
         {
             base.Draw();
-            Raylib.DrawCircleLines((int)Owner.Position.X, (int)Owner.Position.Y, CollisionRadius, Color.BLUE);
+            Raylib.DrawCircleLines((int)Owner.LocalPosition.X, (int)Owner.LocalPosition.Y, CollisionRadius, Color.BLUE);
         }
     }
 }

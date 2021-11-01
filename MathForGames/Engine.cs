@@ -67,8 +67,7 @@ namespace MathForGames
             //Sets what player is and size          
             Player player = new Player(5, 10, 150, scene, "Player", "Images/player.png");
             player.SetScale(50, 50);
-            //player.Translate(250, 85);
-            //player.Rotate(180);
+            //player.SetTranslation(300, 300);
 
             //Sets the hit box for player if they have a circle hit box or squar hit box
             CircleCollider playerCircleCollider = new CircleCollider(50, player);
@@ -79,6 +78,7 @@ namespace MathForGames
             //Sets enemy and enemys size
             Enemy enemy = new Enemy(100, 5, 1, 250, 1,player, "Eneme", "Images/enemy.png");
             enemy.SetScale(50, 50);
+            enemy.LookAt(new Vector2(700, 900));
 
             //Sets Enemys hit box if circle or square
             CircleCollider enemyCircleCollider = new CircleCollider(50, enemy);

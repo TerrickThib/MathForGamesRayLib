@@ -44,7 +44,7 @@ namespace MathForGames
             Velocity = moveDirection.Normalized * Speed * deltaTime;
 
             //Uses velocity with current Position
-            Position += Velocity;
+            LocalPosition += Velocity;
 
             base.Update(deltaTime);
         }
@@ -55,6 +55,12 @@ namespace MathForGames
             {
                 _scene.RemoveActor(actor);
             }
+        }
+
+        public override void Draw()
+        {
+            base.Draw();
+            Collider.Draw();
         }
     }
 }

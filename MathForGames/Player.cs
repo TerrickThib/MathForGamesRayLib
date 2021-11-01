@@ -57,9 +57,9 @@ namespace MathForGames
                 if (xDirectionofBullet != 0 || yDirectionofBullet != 0)
                 {
                     //Sets what a bullet is, sets scale sets bullet size, sets bullet hit box them adds bullet to scene, and resets time
-                    Projectiles bullet = new Projectiles(Position.X, Position.Y, 200, xDirectionofBullet, yDirectionofBullet, _scene, "Bullet", "Images/bullet.png");
+                    Projectiles bullet = new Projectiles(LocalPosition.X, LocalPosition.Y, 200, xDirectionofBullet, yDirectionofBullet, _scene, "Bullet", "Images/bullet.png");
                     bullet.SetScale(25, 25);
-                    CircleCollider bulletCircleCollider = new CircleCollider(25, bullet);
+                    CircleCollider bulletCircleCollider = new CircleCollider(10, bullet);
                     bullet.Collider = bulletCircleCollider;
                     _scene.AddActor(bullet);
                     _timesincelastshot = 0;
@@ -68,11 +68,24 @@ namespace MathForGames
 
             //Creat a vector that stores the move input            
             Vector2 moveDirection = new Vector2(xDirection, yDirection);
+            Vector2 bulletDirection = new Vector2(xDirectionofBullet, yDirectionofBullet);
                                              
             Velocity = moveDirection.Normalized * Speed * deltaTime;
 
+            //Moves players direction to direction your moving
+            if (Velocity.Magnitude > 0)
+            {
+                Forward = Velocity.Normalized; 
+            }
+
+            //Changes players direction to where player is shooting
+            if (bulletDirection.Magnitude > 0)
+            {
+                Forward = bulletDirection.Normalized;
+            }
+
             //Uses velocity with current Position
-            Position += Velocity;
+            LocalPosition += Velocity;
 
             base.Update(deltaTime);
         }
