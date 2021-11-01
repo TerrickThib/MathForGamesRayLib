@@ -63,20 +63,28 @@ namespace MathForGames
             Raylib.SetTargetFPS(60);
 
             Scene scene = new Scene();
-            //Actor actor = new Actor('A', 5, 5, Color.RED, "Actor");           
-            Player player = new Player(5, 10, 150, "Player", "Images/player.png");
+
+            //Sets what player is and size          
+            Player player = new Player(5, 10, 150, scene, "Player", "Images/player.png");
             player.SetScale(50, 50);
+            //player.Translate(250, 85);
+            //player.Rotate(180);
+
+            //Sets the hit box for player if they have a circle hit box or squar hit box
             CircleCollider playerCircleCollider = new CircleCollider(50, player);
             AABBCollider playerBoxCollider = new AABBCollider(50, 50, player);
-            //player.Collider = playerCircleCollider;
+            player.Collider = playerCircleCollider;
             player.Collider = playerBoxCollider;
 
+            //Sets enemy and enemys size
             Enemy enemy = new Enemy(100, 5, 1, 250, 1,player, "Eneme", "Images/enemy.png");
             enemy.SetScale(50, 50);
+
+            //Sets Enemys hit box if circle or square
             CircleCollider enemyCircleCollider = new CircleCollider(50, enemy);
             AABBCollider enemyBoxCollider = new AABBCollider(50, 50, enemy);
             enemy.Collider = enemyCircleCollider;
-            //enemy.Collider = enemyBoxCollider;
+            enemy.Collider = enemyBoxCollider;
 
             //UI Text Section
             UIText text = new UIText(10, 10, "TestTextBox", Color.BLUE, 70, 70, 15, "Taco Bell Makes me yell");

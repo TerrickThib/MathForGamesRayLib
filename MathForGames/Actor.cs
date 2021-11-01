@@ -29,14 +29,19 @@ namespace MathForGames
 
         public Vector2 Position
         {
-            get { return new Vector2(_transform.M02, _transform.M12); }
+            get { return new Vector2(_translation.M02, _translation.M12); }
             set 
-            { 
-                _transform.M02 = value.X;
-                _transform.M12 = value.Y;
+            {
+                SetTranslation(value.X, value.Y);
             }
         }  
                 
+        public Vector2 Size
+        {
+            get { return new Vector2(_scale.M00, _scale.M11); }
+            set { SetScale(value.X, value.Y); }
+        }
+
         public Vector2 Forward
         {
             get { return _forward; }    
@@ -121,8 +126,7 @@ namespace MathForGames
         /// <param name="translationY">The new y position</param>
         public void SetTranslation(float translationX, float translationY)
         {
-            _translation.M02 = translationX;
-            _translation.M12 = translationY;
+            _translation = Matrix3.CreateTranslation(translationX, translationY);
         }
 
         /// <summary>
@@ -132,9 +136,7 @@ namespace MathForGames
         /// <param name="translationY"></param>
         public void Translate(float translationX, float translationY)
         {
-
-            _translation.M02 += translationX;
-            _translation.M12 += translationY;
+            _translation *= Matrix3.CreateTranslation(translationX, translationY);            
         }
 
         /// <summary>
@@ -143,10 +145,7 @@ namespace MathForGames
         /// <param name="radians">The angle in radians to turn.</param>
         public void SetRotation(float radians)
         {
-            _rotation.M00 = (float)Math.Cos(radians);
-            _rotation.M01 = -(float)Math.Sin(radians);
-            _rotation.M10 = (float)Math.Sin(radians);
-            _rotation.M11 = (float)Math.Cos(radians);
+            _rotation = Matrix3.CreateRotation(radians);
             
         }
 
@@ -156,10 +155,7 @@ namespace MathForGames
         /// <param name="radians">The angle in radians to turn.</param>
         public void Rotate(float radians)
         {
-            _rotation.M00 += (float)Math.Cos(radians);
-            _rotation.M01 += -(float)Math.Sin(radians);
-            _rotation.M10 += (float)Math.Sin(radians);
-            _rotation.M11 += (float)Math.Cos(radians);
+            _rotation *= Matrix3.CreateRotation(radians);
         }
 
         /// <summary>
@@ -169,8 +165,7 @@ namespace MathForGames
         /// <param name="y">The value to scale on the y axis</param>
         public void SetScale(float x, float y)
         {
-            _scale.M00 = x;
-            _scale.M11 = y;
+            _scale = Matrix3.CreateScale(x, y);
         }
 
         /// <summary>
@@ -180,8 +175,7 @@ namespace MathForGames
         /// <param name="y">The value to scale on the y axis.</param>
         public void Scale(float x, float y)
         {
-            _scale.M00 += x;
-            _scale.M11 += y;
+            _scale *= Matrix3.CreateScale(x, y);
         }
     }
 }
