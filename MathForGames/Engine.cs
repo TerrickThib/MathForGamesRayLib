@@ -89,11 +89,17 @@ namespace MathForGames
             //UI Text Section
             UIText text = new UIText(10, 10, "TestTextBox", Color.BLUE, 70, 70, 15, "Taco Bell Makes me yell");
             
+
+            Actor child = new Actor(5, 20, "Child", "Images/enemy.png");
+            child.SetScale(1, 1);
+            child.SetTranslation(1, 1);
             
-            //scene.AddActor(actor);            
+            player.AddChild(child);
             scene.AddActor(player);
-            scene.AddActor(enemy);
-            scene.AddActor(text);
+            scene.AddActor(child);
+            //scene.AddActor(actor);                                    
+            //scene.AddActor(enemy);
+            //scene.AddActor(text);
 
             _currentSceneIndex = AddScene(scene);
             _scenes[_currentSceneIndex].Start();

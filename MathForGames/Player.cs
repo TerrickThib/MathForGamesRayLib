@@ -12,7 +12,7 @@ namespace MathForGames
         private Vector2 _velocity;
         public Scene _scene;
         private float _cooldowntimer = 0.5f;
-        private float _timesincelastshot = 0;
+        private float _timesincelastshot = 0;        
 
         //Allows us to give _ speed a value
         public float Speed
