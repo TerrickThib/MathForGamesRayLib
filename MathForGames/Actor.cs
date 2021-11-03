@@ -123,12 +123,55 @@ namespace MathForGames
 
         public void AddChild(Actor child)
         {
+            //Creats a temp array that is larger than the orignal array
+            Actor[] tempArray = new Actor[_children.Length + 1];
 
+            //Clopy all the values from the orginal array into the temp array
+            for (int i = 0; i < _children.Length; i++)
+            {
+                tempArray[i] = _children[i];
+            }
+
+            //Add the new actor to the end of the new array
+            tempArray[_children.Length] = child;
+
+            //Sets the old array to be the new array
+            _children = tempArray;
         }
 
         public bool RemoveChild(Actor child)
         {
-            return true;
+            //Create a variable to store if the removal was successful
+            bool actorRemoved = false;
+
+            //Create a new array that is samller than the orignal
+            Actor[] tempArray = new Actor[_children.Length - 1];
+
+            //Copy all values exept the actor we dont want into the new array
+            int j = 0;
+            for (int i = 0; i < _children.Length; i++)
+            {
+                //If the actor that the loop is on is not the one to remove...
+                if (_children[i] != child)
+                {
+                    //...add the actor into the new array and increment the temp array counter
+                    tempArray[j] = _children[i];
+                    j++;
+                }
+                //Otherwise if this actor is the one to remove...
+                else
+                {
+                    //...set actor removed to true
+                    actorRemoved = true;
+                }
+            }
+
+            if (actorRemoved)
+            {
+                _children = tempArray;
+            }
+
+            return actorRemoved;
         }
 
         public virtual void Start()
