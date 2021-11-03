@@ -14,6 +14,7 @@ namespace MathForGames
         private static int _currentSceneIndex;
         private Scene[] _scenes = new Scene[0];
         private Stopwatch _stopwatch = new Stopwatch();
+        private Camera3D _camera = new Camera3D();
 
         /// <summary>
         /// Called to Begin the application
@@ -50,6 +51,19 @@ namespace MathForGames
             End();
         }
 
+        private void InitializeCamera()
+        {
+            // Camera position
+            _camera.position = new System.Numerics.Vector3(0, 10, 10);
+            // Point the camera is focused on
+            _camera.target = new System.Numerics.Vector3(0, 0, 0);
+            //  Camera u vector (rotation towards target)
+            _camera.up = new System.Numerics.Vector3(0, 1, 0);
+            // Camera field of view Y
+            _camera.fovy = 45;
+            //  Camera mode type
+            _camera.projection = CameraProjection.CAMERA_PERSPECTIVE; //  Camera mode type
+        }
         /// <summary>
         /// Called when the application starts
         /// </summary>
@@ -58,6 +72,9 @@ namespace MathForGames
             //creates stop watch and starts count
             _stopwatch.Start();
 
+            //initlizes the camera
+            InitializeCamera();
+
             //Create a window using raylib
             Raylib.InitWindow(800, 450, "Math For Games");          
             Raylib.SetTargetFPS(60);
@@ -65,8 +82,7 @@ namespace MathForGames
             Scene scene = new Scene();
 
             //Sets what player is and size          
-            Player player = new Player(5, 10, 150, scene, "Player", "Images/player.png");
-            player.SetScale(50, 50);
+            Player player = new Player(5, 10, 150, scene, "Player",Shape.SPHERE);            
             //player.SetTranslation(300, 300);
 
             //Sets the hit box for player if they have a circle hit box or squar hit box
@@ -76,8 +92,7 @@ namespace MathForGames
             player.Collider = playerBoxCollider;
 
             //Sets enemy and enemys size
-            Enemy enemy = new Enemy(100, 5, 1, 250, 1,player, "Eneme", "Images/enemy.png");
-            enemy.SetScale(50, 50);
+            Enemy enemy = new Enemy(100, 5, 1, 250, 1,player, "Eneme", Shape.SPHERE);            
             enemy.LookAt(new Vector2(700, 900));
 
             //Sets Enemys hit box if circle or square
@@ -90,14 +105,13 @@ namespace MathForGames
             UIText text = new UIText(10, 10, "TestTextBox", Color.BLUE, 70, 70, 15, "Taco Bell Makes me yell");
             
 
-            Actor child = new Actor(1, 1, "Child", "Images/enemy.png");
-            child.SetScale(1, 1);
-            child.SetTranslation(1, 1);
+            Actor child = new Actor(1, 1, "Child", Shape.SPHERE);
+            child.SetScale(1, 1, 1);
+            child.SetTranslation(1, 1, 1);
             player.AddChild(child);
 
-            Actor child2 = new Actor(-5, -20, "Child2", "Images/enemy.png");
-            child2.SetScale(0.5f, 0.5f);
-            child2.SetTranslation(1, 1);
+            Actor child2 = new Actor(-5, -20, "Child2", Shape.SPHERE);
+            child2.SetScale(0.5f, 0.5f, 0.5f);           
             child.AddChild(child2);
 
             scene.AddActor(child2);
@@ -134,12 +148,16 @@ namespace MathForGames
         private void Draw()
         {
             Raylib.BeginDrawing();
-            Raylib.ClearBackground(Color.BLACK);
+            Raylib.BeginMode3D(_camera);
+
+            Raylib.ClearBackground(Color.GRAY);
+            Raylib.DrawGrid(50, 1);
 
             //Adds all actor icons to buffer
             _scenes[_currentSceneIndex].Draw();
-            // _scenes[_currentSceneIndex].DrawUI();
+            //_scenes[_currentSceneIndex].DrawUI();
 
+            Raylib.EndMode3D();
             Raylib.EndDrawing();
         }
 

@@ -116,8 +116,12 @@ namespace MathLibrary
                     (lhs.M20 * rhs.M01) + (lhs.M21 * rhs.M11) + (lhs.M22 * rhs.M21),
                     //Row3, Colum3
                     (lhs.M20 * rhs.M02) + (lhs.M21 * rhs.M12) + (lhs.M22 * rhs.M22)
-                 );
-            
+                 );            
+        }
+
+        public static Vector3 operator *(Matrix3 lhs, Vector3 rhs)
+        {
+            return new Vector3();
         }
     }
 }

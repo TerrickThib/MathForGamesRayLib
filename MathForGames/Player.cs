@@ -9,7 +9,7 @@ namespace MathForGames
     class Player : Actor
     {
         private float _speed;
-        private Vector2 _velocity;
+        private Vector3 _velocity;
         public Scene _scene;
         private float _cooldowntimer = 0.5f;
         private float _timesincelastshot = 0;        
@@ -22,14 +22,14 @@ namespace MathForGames
         }
 
         //Allows us to give Velocity a value
-        public Vector2 Velocity
+        public Vector3 Velocity
         {
             get { return _velocity; }
             set { _velocity = value; }
         }
           
-        public Player( float x, float y, float speed,Scene scene, string name = "Actor", string path = "") 
-            : base(x, y, name, path)
+        public Player( float x, float y, float speed,Scene scene, string name = "Actor", Shape shape = Shape.SPHERE) 
+            : base(x, y, name, shape)
         {
             _speed = speed;
             _scene = scene;
@@ -43,22 +43,21 @@ namespace MathForGames
             //GEts the player input direction
             int xDirection = -Convert.ToInt32(Raylib.IsKeyDown(KeyboardKey.KEY_A))
                 + Convert.ToInt32(Raylib.IsKeyDown(KeyboardKey.KEY_D));            
-            int yDirection = -Convert.ToInt32(Raylib.IsKeyDown(KeyboardKey.KEY_W))
+            int zDirection = -Convert.ToInt32(Raylib.IsKeyDown(KeyboardKey.KEY_W))
                 + Convert.ToInt32(Raylib.IsKeyDown(KeyboardKey.KEY_S));
 
             //To shot bullet
             int xDirectionofBullet = -Convert.ToInt32(Raylib.IsKeyDown(KeyboardKey.KEY_LEFT))
                 + Convert.ToInt32(Raylib.IsKeyDown(KeyboardKey.KEY_RIGHT));
-            int yDirectionofBullet = -Convert.ToInt32(Raylib.IsKeyDown(KeyboardKey.KEY_UP))
+            int zDirectionofBullet = -Convert.ToInt32(Raylib.IsKeyDown(KeyboardKey.KEY_UP))
                 + Convert.ToInt32(Raylib.IsKeyDown(KeyboardKey.KEY_DOWN));
 
             if (_timesincelastshot > _cooldowntimer)
             {
-                if (xDirectionofBullet != 0 || yDirectionofBullet != 0)
+                if (xDirectionofBullet != 0 || zDirectionofBullet != 0)
                 {
                     //Sets what a bullet is, sets scale sets bullet size, sets bullet hit box them adds bullet to scene, and resets time
-                    Projectiles bullet = new Projectiles(LocalPosition.X, LocalPosition.Y, 200, xDirectionofBullet, yDirectionofBullet, _scene, "Bullet", "Images/bullet.png");
-                    bullet.SetScale(25, 25);
+                    Projectiles bullet = new Projectiles(LocalPosition.X, LocalPosition.Y, 200, xDirectionofBullet, zDirectionofBullet, _scene, "Bullet", Shape.SPHERE);                    
                     CircleCollider bulletCircleCollider = new CircleCollider(10, bullet);
                     bullet.Collider = bulletCircleCollider;
                     _scene.AddActor(bullet);
@@ -67,23 +66,11 @@ namespace MathForGames
             }
 
             //Creat a vector that stores the move input            
-            Vector2 moveDirection = new Vector2(xDirection, yDirection);
-            Vector2 bulletDirection = new Vector2(xDirectionofBullet, yDirectionofBullet);
+            Vector3 moveDirection = new Vector3(xDirection,0, zDirection);
+            Vector3 bulletDirection = new Vector3(xDirectionofBullet,0, zDirectionofBullet);
                                              
-            Velocity = moveDirection.Normalized * Speed * deltaTime;
-
-            //Moves players direction to direction your moving
-            if (Velocity.Magnitude > 0)
-            {
-                Forward = Velocity.Normalized; 
-            }
-
-            //Changes players direction to where player is shooting
-            if (bulletDirection.Magnitude > 0)
-            {
-                Forward = bulletDirection.Normalized;
-            }
-
+            //Velocity = moveDirection.Normalized * Speed * deltaTime;
+            
             //Uses velocity with current Position
             LocalPosition += Velocity;
 

@@ -27,8 +27,8 @@ namespace MathForGames
             set { _velocity = value; }
         }
 
-        public Projectiles(float x, float y, float speed, int xdirection, int ydirection, Scene scene, string name = "Actor", string path = "")
-            : base(x, y, name, path)
+        public Projectiles(float x, float y, float speed, int xdirection, int ydirection, Scene scene, string name = "Actor", Shape shape = Shape.SPHERE)
+            : base(x, y, name, shape)
         {
             _speed = speed;
             _xdirection = xdirection;
@@ -44,7 +44,7 @@ namespace MathForGames
             Velocity = moveDirection.Normalized * Speed * deltaTime;
 
             //Uses velocity with current Position
-            LocalPosition += Velocity;
+            //LocalPosition += Velocity;
 
             base.Update(deltaTime);
         }

@@ -9,7 +9,7 @@ namespace MathForGames
     class Enemy : Actor
     {
         private float _speed;
-        private Vector2 _velocity;
+        private Vector3 _velocity;
         public Player _player;
         private float _maxViewingAngle;
         private float _maxSightDistance;
@@ -23,7 +23,7 @@ namespace MathForGames
         }
 
         //Allows us to give Velocity a value
-        public Vector2 Velocity
+        public Vector3 Velocity
         {
             get { return _velocity; }
             set { _velocity = value; }
@@ -41,8 +41,8 @@ namespace MathForGames
             set { _maxSightDistance = value; }
         }
 
-        public Enemy(float x, float y, float speed, float maxSightDistance, float maxViewingAngle, Player player, string name = "Actor", string path = "")
-            : base(x, y,name, path)
+        public Enemy(float x, float y, float speed, float maxSightDistance, float maxViewingAngle, Player player, string name = "Actor",Shape shape = Shape.SPHERE)
+            : base(x, y,name, shape)
         {
             _speed = speed;
             _player = player;
@@ -52,11 +52,11 @@ namespace MathForGames
         public override void Update(float deltaTime)
         {
             //Inishalizes distance
-            Vector2 distance = new Vector2();
+            Vector3 distance = new Vector3();
             //Takes players position and eneme position to get differance
             distance = _player.LocalPosition - LocalPosition;
             distance.Normalize();
-            Velocity = distance * Speed * deltaTime;
+            //Velocity = distance * Speed * deltaTime;
 
             if(GetTargetInSight()&& GetTargetIndistance())
                 LocalPosition += Velocity;
@@ -66,13 +66,13 @@ namespace MathForGames
 
         public bool GetTargetInSight()
         {            
-            Vector2 directionOfTarget = (_player.LocalPosition - LocalPosition).Normalized;                      
+            Vector3 directionOfTarget = (_player.LocalPosition - LocalPosition).Normalized;                      
             
-            return Math.Acos(Vector2.DotProduct(directionOfTarget, Forward)) < _maxViewingAngle;                                            
+            return Math.Acos(Vector3.DotProduct(directionOfTarget, Forward)) < _maxViewingAngle;                                            
         }
         public bool GetTargetIndistance()
         { 
-            return Vector2.Distance(_player.LocalPosition, LocalPosition) < _maxSightDistance;
+            return Vector3.Distance(_player.LocalPosition, LocalPosition) < _maxSightDistance;
         }
         public override void OnCollision(Actor actor)
         {
