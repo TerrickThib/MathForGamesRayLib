@@ -29,15 +29,7 @@ namespace MathForGames
         {
             get { return _started; }
         }
-
-        public float ScaleX
-        {
-            get { return new Vector2(_scale.M00, _scale.M10).Magnitude; }
-        }
-        public float ScaleY
-        {
-            get { return new Vector2(_scale.M01, _scale.M11).Magnitude; }
-        }
+        
         public Vector2 LocalPosition
         {
             get { return new Vector2(_translation.M02, _translation.M12); }
@@ -47,18 +39,29 @@ namespace MathForGames
             }
         }  
 
+        /// <summary>
+        /// The position of this actor in the world
+        /// </summary>
         public Vector2 WorldPosition
         {
-            get { return new Vector2(_translation.M02, _translation.M12); }
+            //Return the global transform's T column
+            get { return new Vector2(_globalTransform.M02, _globalTransform.M12); }
             set
             {
+                //If the parent isn't null...
                 if(Parent != null)
                 {
-                    Vector2 offset = value - Parent.LocalPosition;
-                    SetTranslation(offset.X / ScaleX, offset.Y / ScaleY);
+                    //...Convert the world cooridinates into local cooridinates and translate the actor
+                    float xOffset = (value.X - Parent.WorldPosition.X)/ new Vector2(_globalTransform.M00, _globalTransform.M10).Magnitude;
+                    float yOffset = (value.Y - Parent.WorldPosition.Y)/ new Vector2(_globalTransform.M10, _globalTransform.M11).Magnitude;
+                    SetTranslation(xOffset, yOffset);
                 }
+                //If this actor doesnt have a parent...
                 else
-                SetTranslation(value.X, value.Y);
+                {
+                    //...Set the position to be the given value
+                    LocalPosition = value;
+                }
             }
         }
 
@@ -88,7 +91,13 @@ namespace MathForGames
                 
         public Vector2 Size
         {
-            get { return new Vector2(_scale.M00, _scale.M11); }
+            get 
+            {
+                float xScale = new Vector2(_scale.M00, _scale.M10).Magnitude;
+                float yscale = new Vector2(_scale.M01, _scale.M11).Magnitude;
+
+                return new Vector2(xScale, yscale);
+            }
             set { SetScale(value.X, value.Y); }
         }
 
@@ -129,10 +138,12 @@ namespace MathForGames
                 _sprite = new Sprite(path);
             }
         }
-
+        
         public void UpdateTransforms()
         {
-           if (Parent != null)
+            _localTransform = _translation * _rotation * _scale;
+
+            if (Parent != null)
             {
                 GlobalTransform = Parent.GlobalTransform * LocalTransform;
             }
@@ -156,16 +167,17 @@ namespace MathForGames
             //Add the new actor to the end of the new array
             tempArray[_children.Length] = child;
 
-            //Sets the old array to be the new array
-            _children = tempArray;
-
+            //Set the parent of the actor to be this actor
             child.Parent = this;
+
+            //Sets the old array to be the new array
+            _children = tempArray;           
         }
 
         public bool RemoveChild(Actor child)
         {
             //Create a variable to store if the removal was successful
-            bool childRemoved = false;
+            bool actorRemoved = false;
 
             //Create a new array that is samller than the orignal
             Actor[] tempArray = new Actor[_children.Length - 1];
@@ -185,17 +197,21 @@ namespace MathForGames
                 else
                 {
                     //...set actor removed to true
-                    childRemoved = true;
+                    actorRemoved = true;
                 }
             }
 
-            if (childRemoved)
+            //If the actor removal was successful...
+            if (actorRemoved)
             {
+                //...Set the old array to be the new array
                 _children = tempArray;
+
+                //Set the parent of the child to be nothing
                 child.Parent = null;
             }
 
-            return childRemoved;
+            return actorRemoved;
         }
 
         public virtual void Start()
@@ -204,10 +220,9 @@ namespace MathForGames
         }
 
         public virtual void Update(float deltaTime)
-        {
-            _localTransform = _translation * _rotation * _scale;
+        {            
             Console.WriteLine(_name + ": " + LocalPosition.X + ", " + LocalPosition.Y);
-            this.Rotate(0.1f);
+            this.Rotate(0.05f);
             UpdateTransforms();
         }
 
