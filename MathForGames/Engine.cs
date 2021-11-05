@@ -15,6 +15,7 @@ namespace MathForGames
         private Scene[] _scenes = new Scene[0];
         private Stopwatch _stopwatch = new Stopwatch();
         private Camera3D _camera = new Camera3D();
+        private Player _camPlayer;
 
         /// <summary>
         /// Called to Begin the application
@@ -82,45 +83,24 @@ namespace MathForGames
             Scene scene = new Scene();
 
             //Sets what player is and size          
-            Player player = new Player(5, 10, 150, scene, "Player",Shape.SPHERE);            
+            Player player = new Player(0, 0, 0, 50, scene, "Player",Shape.SPHERE);
             //player.SetTranslation(300, 300);
+            _camPlayer = player;
 
             //Sets the hit box for player if they have a circle hit box or squar hit box
             CircleCollider playerCircleCollider = new CircleCollider(50, player);
             AABBCollider playerBoxCollider = new AABBCollider(50, 50, player);
             player.Collider = playerCircleCollider;
-            player.Collider = playerBoxCollider;
-
-            //Sets enemy and enemys size
-            Enemy enemy = new Enemy(100, 5, 1, 250, 1,player, "Eneme", Shape.SPHERE);            
-            enemy.LookAt(new Vector2(700, 900));
+            player.Collider = playerBoxCollider;            
 
             //Sets Enemys hit box if circle or square
-            CircleCollider enemyCircleCollider = new CircleCollider(50, enemy);
-            AABBCollider enemyBoxCollider = new AABBCollider(50, 50, enemy);
-            enemy.Collider = enemyCircleCollider;
-            enemy.Collider = enemyBoxCollider;
-
-            //UI Text Section
-            UIText text = new UIText(10, 10, "TestTextBox", Color.BLUE, 70, 70, 15, "Taco Bell Makes me yell");
+            //CircleCollider enemyCircleCollider = new CircleCollider(50, enemy);
+            //AABBCollider enemyBoxCollider = new AABBCollider(50, 50, enemy);
+            //enemy.Collider = enemyCircleCollider;
+            //enemy.Collider = enemyBoxCollider;
+                                                                      
+            scene.AddActor(player);  
             
-
-            Actor child = new Actor(1, 1, "Child", Shape.SPHERE);
-            child.SetScale(1, 1, 1);
-            child.SetTranslation(1, 1, 1);
-            player.AddChild(child);
-
-            Actor child2 = new Actor(-5, -20, "Child2", Shape.SPHERE);
-            child2.SetScale(0.5f, 0.5f, 0.5f);           
-            child.AddChild(child2);
-
-            scene.AddActor(child2);
-            scene.AddActor(player);
-            scene.AddActor(child);
-            //scene.AddActor(actor);                                    
-            //scene.AddActor(enemy);
-            //scene.AddActor(text);
-
             _currentSceneIndex = AddScene(scene);
             _scenes[_currentSceneIndex].Start();
 
@@ -134,7 +114,12 @@ namespace MathForGames
         private void Update(float deltaTime)
         {
             _scenes[_currentSceneIndex].Update(deltaTime);
-                        
+
+            // Camera position On player offset by 10
+            _camera.position = new System.Numerics.Vector3(_camPlayer.WorldPosition.X, _camPlayer.WorldPosition.Y + 10, _camPlayer.WorldPosition.Z + 10);
+            // Point the camera is focused on
+            _camera.target = new System.Numerics.Vector3(_camPlayer.WorldPosition.X, _camPlayer.WorldPosition.Y, _camPlayer.WorldPosition.Z);
+
             //While there is a key in the input bufer read it
             while (Console.KeyAvailable)
             {

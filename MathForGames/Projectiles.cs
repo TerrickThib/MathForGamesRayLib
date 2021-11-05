@@ -27,8 +27,8 @@ namespace MathForGames
             set { _velocity = value; }
         }
 
-        public Projectiles(float x, float y, float speed, int xdirection, int ydirection, Scene scene, string name = "Actor", Shape shape = Shape.SPHERE)
-            : base(x, y, name, shape)
+        public Projectiles(float x, float y, float z, float speed, int xdirection, int ydirection, Scene scene, string name = "Actor", Shape shape = Shape.SPHERE)
+            : base(x, y,z, name, shape)
         {
             _speed = speed;
             _xdirection = xdirection;

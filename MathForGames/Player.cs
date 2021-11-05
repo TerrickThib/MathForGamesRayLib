@@ -28,8 +28,8 @@ namespace MathForGames
             set { _velocity = value; }
         }
           
-        public Player( float x, float y, float speed,Scene scene, string name = "Actor", Shape shape = Shape.SPHERE) 
-            : base(x, y, name, shape)
+        public Player( float x, float y, float z, float speed,Scene scene, string name = "Actor", Shape shape = Shape.SPHERE) 
+            : base(x, y, z, name, shape)
         {
             _speed = speed;
             _scene = scene;
@@ -57,11 +57,11 @@ namespace MathForGames
                 if (xDirectionofBullet != 0 || zDirectionofBullet != 0)
                 {
                     //Sets what a bullet is, sets scale sets bullet size, sets bullet hit box them adds bullet to scene, and resets time
-                    Projectiles bullet = new Projectiles(LocalPosition.X, LocalPosition.Y, 200, xDirectionofBullet, zDirectionofBullet, _scene, "Bullet", Shape.SPHERE);                    
-                    CircleCollider bulletCircleCollider = new CircleCollider(10, bullet);
-                    bullet.Collider = bulletCircleCollider;
-                    _scene.AddActor(bullet);
-                    _timesincelastshot = 0;
+                    //Projectiles bullet = new Projectiles(LocalPosition.X, LocalPosition.Y, 200, xDirectionofBullet, zDirectionofBullet, _scene, "Bullet", Shape.SPHERE);                    
+                    //CircleCollider bulletCircleCollider = new CircleCollider(10, bullet);
+                   // bullet.Collider = bulletCircleCollider;
+                    //_scene.AddActor(bullet);
+                    //_timesincelastshot = 0;
                 }
             }
 
@@ -69,7 +69,7 @@ namespace MathForGames
             Vector3 moveDirection = new Vector3(xDirection,0, zDirection);
             Vector3 bulletDirection = new Vector3(xDirectionofBullet,0, zDirectionofBullet);
                                              
-            //Velocity = moveDirection.Normalized * Speed * deltaTime;
+            Velocity = moveDirection.Normalized * Speed * deltaTime;
             
             //Uses velocity with current Position
             LocalPosition += Velocity;

@@ -121,8 +121,8 @@ namespace MathForGames
 
         public Actor() { }
 
-        public Actor(float x, float y, string name = "Actor", Shape shape = Shape.CUBE)
-            : this (new Vector3 { X = x, Y = y}, name, shape) {}
+        public Actor(float x, float y, float z, string name = "Actor", Shape shape = Shape.CUBE)
+            : this (new Vector3 { X = x, Y = y, Z = z}, name, shape) {}
         
         public Actor(Vector3 position, string name = "Actor", Shape shape = Shape.CUBE)
         {            
