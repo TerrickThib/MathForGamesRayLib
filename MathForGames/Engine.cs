@@ -85,14 +85,14 @@ namespace MathForGames
             //Sets what player is and size          
             Player player = new Player(0, 0, 0, 50, scene, "Player",Shape.SPHERE);
             //player.SetTranslation(300, 300);
-
             //red, green, blue, transparent and max value is 255
             player.SetColor(new Vector4(255, 0, 255, 255));
             _camPlayer = player;
-            player.LookAt(new Vector3(1, 0, 0));
+            player.LookAt(new Vector3(0,1,0));
             //Mike Waz Herre lololol
 
-            Enemy enemyTest = new Enemy(50, 0, 50, 10, 150, 150, player, "TEstenemy", Shape.CUBE);
+            Enemy enemyTest = new Enemy(1, 1, 0, 10, 150, 150, player, "TEstenemy", Shape.CUBE);
+            enemyTest.SetColor(new Vector4(155, 0, 0, 255));
 
             //Sets the hit box for player if they have a circle hit box or squar hit box
             CircleCollider playerCircleCollider = new CircleCollider(50, player);
@@ -107,7 +107,7 @@ namespace MathForGames
             //enemy.Collider = enemyBoxCollider;
                                                                       
             scene.AddActor(player);
-            //scene.AddActor(enemyTest);
+            scene.AddActor(enemyTest);
 
             _currentSceneIndex = AddScene(scene);
             _scenes[_currentSceneIndex].Start();
