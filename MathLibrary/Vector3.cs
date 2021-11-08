@@ -40,12 +40,12 @@ namespace MathLibrary
             if (Magnitude == 0)
                 return new Vector3();
 
-            return this / Magnitude;
+            return this /= Magnitude;
         }
 
         public static float DotProduct(Vector3 lhs, Vector3 rhs)
         {
-            return (lhs.X * rhs.X) + (lhs.Y * rhs.Y);
+            return (lhs.X * rhs.X) + (lhs.Y * rhs.Y) + (lhs.Z * rhs.Z);
         }
 
         public static float Distance(Vector3 lhs, Vector3 rhs)
@@ -63,7 +63,13 @@ namespace MathLibrary
             return new Vector3 { X = lhs.X + rhs.X, Y = lhs.Y + rhs.Y, Z = lhs.Z + rhs.Z };
         }
 
+        //VEctor * float
         public static Vector3 operator *(Vector3 lhs, float scalar)
+        {
+            return new Vector3 { X = lhs.X * scalar, Y = lhs.Y * scalar, Z = lhs.Z * scalar };
+        }
+        //float * vector
+        public static Vector3 operator *(float scalar, Vector3 lhs)
         {
             return new Vector3 { X = lhs.X * scalar, Y = lhs.Y * scalar, Z = lhs.Z * scalar };
         }

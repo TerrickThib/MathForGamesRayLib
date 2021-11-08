@@ -57,6 +57,13 @@ namespace MathLibrary
                                0, 0, 1);                                
         }
 
+        public static Matrix3 CreateTranslation(Vector2 Position)
+        {
+            return new Matrix3(1, 0, Position.X,
+                               0, 1, Position.Y,
+                               0, 0, 1);
+        }
+
         /// <summary>
         /// Creates a new matrix that has been scaled by teh given value
         /// </summary>
@@ -121,7 +128,11 @@ namespace MathLibrary
 
         public static Vector3 operator *(Matrix3 lhs, Vector3 rhs)
         {
-            return new Vector3();
+            return new Vector3(
+                (lhs.M00 * rhs.X) + (lhs.M01 * rhs.Y) + (lhs.M02 * rhs.Z),
+                (lhs.M10 * rhs.X) + (lhs.M11 * rhs.Y) + (lhs.M12 * rhs.Z),
+                (lhs.M20 * rhs.X) + (lhs.M21 * rhs.Y) + (lhs.M22 * rhs.Z)
+                );
         }
     }
 }

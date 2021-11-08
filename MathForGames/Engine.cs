@@ -90,6 +90,7 @@ namespace MathForGames
             player.SetColor(new Vector4(255, 0, 255, 255));
             _camPlayer = player;
             player.LookAt(new Vector3(1, 0, 0));
+            //Mike Waz Herre lololol
 
             Enemy enemyTest = new Enemy(50, 0, 50, 10, 150, 150, player, "TEstenemy", Shape.CUBE);
 

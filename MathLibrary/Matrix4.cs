@@ -145,6 +145,6 @@ namespace MathLibrary
                     (lhs.M30 * rhs.M03) + (lhs.M31 * rhs.M13) + (lhs.M32 * rhs.M23) + (lhs.M33 * rhs.M33)
                 );
         }
-        
+      
     }
 }
