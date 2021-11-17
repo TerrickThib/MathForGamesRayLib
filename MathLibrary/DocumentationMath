@@ -1,0 +1,45 @@
+**Terrick Thibodeaux**  
+S218032  
+Math For Games  
+Math Libary  
+
+# I.Requirements  
+**1. Description Of Problem** 
+
+**Name:** Math Library
+
+**Problem Statement:**  
+Need to have simmple math or math fucntions that can be easily called on for later use. 
+
+**Problem Specifications:**   
+* Need to have Simple math for later use   
+* Need to have functions that are usniversally used that can be called   
+
+ # II.Design  
+
+ *1.System Architecture*   
+ All objects can be used to create 2d, 3d or velocity. They each are responisble for soliving or holding math function and simple math. As well as housing thing such as rotation, translation, and scale.  
+
+ *2.Object Information* 
+
+ * **File Name:** Matrix3  
+    * Name: Identity  
+        * Description: Gives the matrix a default value  
+        * Visablity: Public  
+    * Name: CreateRotation(float radians)  
+        * Description: Creates a new matrix that has been rotated by the given value in radians  
+        * Visablity: Public  
+    * Name: CreateTranslation(float x, float y)  
+        * Description: Creates a new matrix that has been translated by the given value  
+        * Visablity: Public  
+    * Name: CreateTranslation(Vector2 Position)  
+        * Description: Creates a new matrix that has been translated by a vector2 Position  
+        * Visablity: Public   
+    * Name: CreateScale(floatx, float y)  
+        * Description: Creates a new matrix that has been scaled by the given value  
+        * Visablity: Public  
+    * Name: Matrix3 operator +(Matrix3 lhs, Matrix3 rhs)  
+        * Description: Adds the lhs and the rhs of a MAtrix 3 and returns a new matrix 3  
+        * Visablity: Public   
+    * Name
+    

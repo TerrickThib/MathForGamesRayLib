@@ -57,6 +57,12 @@ namespace MathLibrary
                                0, 0, 1);                                
         }
 
+
+        /// <summary>
+        /// Creates a new matrix that has been translated by the given Vector2 Position
+        /// </summary>
+        /// <param name="Position"></param>
+        /// <returns></returns>
         public static Matrix3 CreateTranslation(Vector2 Position)
         {
             return new Matrix3(1, 0, Position.X,
@@ -79,6 +85,12 @@ namespace MathLibrary
                 0, 0, 1);            
         }
 
+        /// <summary>
+        /// Adds the lhs and the rhs then returns a new matrix
+        /// </summary>
+        /// <param name="lhs"></param>
+        /// <param name="rhs"></param>
+        /// <returns></returns>
         public static Matrix3 operator +(Matrix3 lhs, Matrix3 rhs)
         {
             return new Matrix3
