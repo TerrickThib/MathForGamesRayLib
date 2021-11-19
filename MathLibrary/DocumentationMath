@@ -22,7 +22,7 @@ Need to have simmple math or math fucntions that can be easily called on for lat
 
  *2.Object Information* 
 
- * **File Name:** Matrix3  
+ * **File Name:** Matrix3.cs  
     * Name: Identity  
         * Description: Gives the matrix a default value  
         * Visablity: Public  
@@ -41,5 +41,159 @@ Need to have simmple math or math fucntions that can be easily called on for lat
     * Name: Matrix3 operator +(Matrix3 lhs, Matrix3 rhs)  
         * Description: Adds the lhs and the rhs of a MAtrix 3 and returns a new matrix 3  
         * Visablity: Public   
-    * Name
+    * Name: Matrix3 operator -(Matrix3 lhs, Matrix3 rhs)  
+        * Description: Subtracts the lhs from the rhs and returns a new Matrix3  
+        * Visablity: Public  
+    * Name: Matrix3 operator *(Matrix3 lhs, Matrix3 rhs)  
+        * Description: Multiplys a lhs and rhs then adds the results to return a new Matrix3  
+        * Visablity: Public  
+    * Name: Vector3 operator *(Matrix3 lhs, Vector3 rhs)  
+        * Description: multiplys a matrix3 lhs and VEctor3 rhs and adds the results and returns a new Vector3  
+        * Visablity: Public  
+* **File Name** Matrix4.cs  
+    * Name: Identity  
+        * Description: Gives the matrix4 a default value  
+        * Visablity: Public   
+    * Name: CreateRotationZ(float radians)  
+        * Description: Creates a new matrix4 that has been rotated by the given value in radians, Rotates the Z 
+        * Visablity: Public    
+    * Name: CreateRotationY(float radians)  
+        * Description: Creates a new matrix4 that has been rotated by the given value in radians, Rotates the Y 
+        * Visablity: Public    
+    * Name: CreateRotationX(float radians)  
+        * Description: Creates a new matrix4 that has been rotated by the given value in radians, Rotates the X 
+        * Visablity: Public      
+    * Name: CreateTranslation(float x, float y, float z)  
+        * Description: Creates a new matrix4 that has been translated by the given value  
+        * Visablity: Public    
+    * Name: CreateScale(floatx, float y)  
+        * Description: Creates a new matrix4 that has been scaled by the given value  
+        * Visablity: Public    
+    * Name: Matrix4 operator +(Matrix4 lhs, Matrix4 rhs)  
+        * Description: Adds the lhs and rhs and returns new Matrix4  
+        * Visablity: Public  
+    * Name: Matrix4 operator -(Matrix4 lhs, Matrix4 rhs)  
+        * Description: Subtracts the lhs and rhs and returns new matrix4  
+        * Visablity: Public  
+    * Name: Matrix4 operator *(Matrix4 lhs, Matrix4 rhs)  
+        * Description: Multiplys lhs row and rhs Column and adds the together to return a new Matrix4  
+        * Visablity: Public  
+* **File Name:** Vector2.cs  
+    * Name: Magnitude  
+        * Description: Gets the length of the vector   
+        * Visablity: Public  
+    * Name: Vector2 Normalized  
+        * Description: Gets the normalized version of this vector without changing it  
+        * Visablity: Public  
+    * Name: Vector2 Normalize( )  
+        * Description: Changes this vector to have a magnitude that is equal to one  
+        * Visablity: Public  
+    * Name: DotProduct(Vector2 lhs, Vector2 rhs)  
+        * Description: Returns the dot product of the first vector on the second by multiplying lhs, rhs then adding them  
+        * Visablity: Public  
+    * Name: Distance(Vector2 lhs, Vector2 rhs)  
+        * Description: Finds the distance from the first vector to the second  
+        * Visablity: Public  
+    * Name: Vector2 operator + (Vector2 lhs, Vector2 rhs)  
+        * Description: Adds the x value of the second vector to the first, and addds the y value of the second vector to the first  
+        * Visablity: Public  
+    * Name: Vector2 operator - (Vector2 lhs, Vector2 rhs)  
+        * Description: Subtracts the x value of the second vector to the first, and subtracts the y value of the second vector to the first  
+        * Visablity: Public  
+    * Name: Vector2 operator *(Vector2 lhs, float scalar)  
+        * Description: Multiplies the vectors x and y values by the scaler  
+        * Visablity: Public  
+    * Name: Vector2 operator /(Vector2 lhs, float scalar)  
+        * Description: Divides the vector's x and y values by the scalar given  
+        * Visablity: Public  
+    * Name: operator ==(Vector2 lhs, Vector2 rhs)  
+        * Description: Compares the x and y values of two vectors  
+        * Visablity: Public  
+    * Name: operator !=(Vector2 lhs, Vector2 rhs)  
+        * Description: Compares the x and y values of two vectors  
+        * Visablity: Public  
+* **File Name:** Vector3.cs  
+    * Name: Magnitude  
+        * Description: Gets the length of the vector   
+        * Visablity: Public  
+    * Name: Vector3 Normalized  
+        * Description: Gets the normalized version of this vector without changing it  
+        * Visablity: Public  
+    * Name: Vector3 Normalize( )  
+        * Description: Changes this vector to have a magnitude that is equal to one  
+        * Visablity: Public  
+    * Name: DotProduct(Vector3 lhs, Vector3 rhs)  
+        * Description: Returns the dot product of the first vector on the second by multiplying lhs, rhs then adding them  
+        * Visablity: Public  
+    * Name: Distance(Vector3 lhs, Vector3 rhs)  
+        * Description: Finds the distance from the first vector to the second  
+        * Visablity: Public  
+    * Name: Vector3 operator + (Vector3 lhs, Vector3 rhs)  
+        * Description: Adds the x value of the second vector to the first, and addds the y value of the second vector to the first  
+        * Visablity: Public  
+    * Name: Vector3 operator - (Vector3 lhs, Vector3 rhs)  
+        * Description: Subtracts the x value of the second vector to the first, and subtracts the y value of the second vector to the first  
+        * Visablity: Public  
+    * Name: Vector3 operator *(Vector3 lhs, float scalar)  
+        * Description: Multiplies the vectors x, y and z values by the scaler  
+        * Visablity: Public  
+    * Name:Vector3 operator *(float scalar, Vector3 lhs)  
+        * Description: Multiplys a scaler by a vectors x,y and z  
+        * Visablity: Public
+    * Name: Vector3 operator /(Vector3 lhs, float scalar)  
+        * Description: Divides the vector's x, y and z values by the scalar given  
+        * Visablity: Public  
+    * Name: operator ==(Vector3 lhs, Vector3 rhs)  
+        * Description: Compares the x, y and z values of two vectors  
+        * Visablity: Public  
+    * Name: operator !=(Vector2 lhs, Vector2 rhs)  
+        * Description: Compares the x, y and z values of two vectors  
+        * Visablity: Public  
+    * Name: Vector3 CrossProduct(Vector3 lhs, Vector3 rhs)  
+        * Description: Finds the cross product by multiplying lhs by rhs and subtraction to create a new Vector 3  
+        * Visablity: Public  
+* **File Name**  Vector4.cs  
+    * Name: Magnitude  
+        * Description: Gets the length of the vector   
+        * Visablity: Public  
+    * Name: Vector4 Normalized  
+        * Description: Gets the normalized version of this vector without changing it  
+        * Visablity: Public  
+    * Name: Vector4 Normalize( )  
+        * Description: Changes this vector to have a magnitude that is equal to one  
+        * Visablity: Public  
+    * Name: DotProduct(Vector4 lhs, Vector4 rhs)  
+        * Description: Returns the dot product of the first vector on the second by multiplying lhs, rhs then adding them  
+        * Visablity: Public  
+    * Name: Distance(Vector4 lhs, Vector4 rhs)  
+        * Description: Finds the distance from the first vector to the second  
+        * Visablity: Public  
+    * Name: Vector4 operator + (Vector4 lhs, Vector4 rhs)  
+        * Description: Adds the x value of the second vector to the first, and addds the y value of the second vector to the first  
+        * Visablity: Public  
+    * Name: Vector4 operator - (Vector4 lhs, Vector4 rhs)  
+        * Description: Subtracts the x value of the second vector to the first, and subtracts the y value of the second vector to the first  
+        * Visablity: Public  
+    * Name: Vector4 operator *(Vector4 lhs, float scalar)  
+        * Description: Multiplies the vectors x, y and z values by the scaler  
+        * Visablity: Public  
+    * Name:Vector4 operator *(float scalar, Vector4 lhs)  
+        * Description: Multiplys a scaler by a vectors x,y and z  
+        * Visablity: Public
+    * Name: Vector4 operator /(Vector4 lhs, float scalar)  
+        * Description: Divides the vector's x, y and z values by the scalar given  
+        * Visablity: Public  
+    * Name: operator ==(Vector4 lhs, Vector4 rhs)  
+        * Description: Compares the x, y and z values of two vectors  
+        * Visablity: Public  
+    * Name: operator !=(Vector4 lhs, Vector4 rhs)  
+        * Description: Compares the x, y and z values of two vectors  
+        * Visablity: Public  
+    * Name: Vector4 CrossProduct(Vector4 lhs, Vector4 rhs)  
+        * Description: Finds the cross product by multiplying lhs by rhs and subtraction to create a new Vector 4  
+        * Visablity: Public  
+    * Name: Vector4 operator *(Matrix4 lhs, Vector4 rhs)   
+        * Description:  Multiplys Matrix4 lhs by Vector 4 rhs then adds them to create a new vector4  
+        * Visablity: Public  
+    
     

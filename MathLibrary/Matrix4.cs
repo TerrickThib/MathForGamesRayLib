@@ -21,6 +21,7 @@ namespace MathLibrary
             M20 = m20; M21 = m21; M22 = m22; M23 = m23;
             M30 = m30; M31 = m31; M32 = m32; M33 = m33;
         }
+        //Default value for a Matrix 4
         public static Matrix4 Identity
         {
             get
@@ -33,6 +34,7 @@ namespace MathLibrary
             }
         }
 
+        //Creates a rotation with given radians for the z axis
         public static Matrix4 CreateRotationZ(float radians)
         {
             return new Matrix4
@@ -43,7 +45,7 @@ namespace MathLibrary
                                      0, 0, 0, 1
                 );
         }
-
+        //Creates a rotation with given radians for the Y axis
         public static Matrix4 CreateRotationY(float radians)
         {
             return new Matrix4
@@ -54,7 +56,7 @@ namespace MathLibrary
                                0, 0, 0, 1
                 );
         }
-
+        //Creates a rotation with given radians for the X axis
         public static Matrix4 CreateRotationX(float radians)
         {
             return new Matrix4
@@ -65,6 +67,7 @@ namespace MathLibrary
                 );
         }
 
+        //Creates translation by taking in a x,y,z ad returning a new matrix4
         public static Matrix4 CreateTranslation(float x, float y, float z)
         {
             return new Matrix4(1, 0, 0, x,
@@ -72,7 +75,7 @@ namespace MathLibrary
                                0, 0, 1, z,
                                0, 0, 0, 1);
         }
-
+        //Creates scale using a x,y,z and returns a new Matrix4
         public static Matrix4 CreateScale(float x, float y, float z)
         {
             return new Matrix4
@@ -83,6 +86,7 @@ namespace MathLibrary
                 0, 0, 0, 1);
         }
 
+        //Adds the lhs and rhs and returns new Matrix4
         public static Matrix4 operator +(Matrix4 lhs, Matrix4 rhs)
         {
             return new Matrix4
@@ -93,7 +97,7 @@ namespace MathLibrary
                lhs.M30 + rhs.M30, lhs.M31 + rhs.M31, lhs.M32 + rhs.M32, lhs.M33 + rhs.M33
                );
         }
-
+        //Subtracts the lhs and rhs and returns new matrix4
         public static Matrix4 operator -(Matrix4 lhs, Matrix4 rhs)
         {
             return new Matrix4
@@ -104,7 +108,7 @@ namespace MathLibrary
                  lhs.M30 - rhs.M30, lhs.M31 - rhs.M31, lhs.M32 - rhs.M32, lhs.M33 - rhs.M33
                  );
         }
-
+        //Multiplys lhs row and rhs Column and adds the together to return a new Matrix4
         public static Matrix4 operator *(Matrix4 lhs, Matrix4 rhs)
         {
             return new Matrix4(
